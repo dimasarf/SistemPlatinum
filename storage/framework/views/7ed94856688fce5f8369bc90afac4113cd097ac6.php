@@ -66,7 +66,7 @@
                                         <select class="custom-select option-jam" id="option-jam-<?php echo e($i); ?>">
                                             <option value="17.00 - 18.30">17.00 - 18.30</option>
                                             <option value="18.30 - 20.00">18.30 - 20.00</option>
-                                            <option value="20.30 - 22.00">20.30 - 22.00</option>
+                                            <option value="20.00 - 21.30">20.00 - 21.30</option>
                                         </select>
                                     </div>                                            
                                 </div>
