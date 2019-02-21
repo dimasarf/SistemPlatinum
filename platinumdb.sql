@@ -24,15 +24,15 @@ DROP TABLE IF EXISTS `jadwals`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `jadwals` (
   `id` int(10) unsigned NOT NULL,
-  `jam` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `idTentor` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jam` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `idTentor` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `idMapel` int(11) NOT NULL,
   `idKelas` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `tanggal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tanggal` varchar(255) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`jam`,`idTentor`,`tanggal`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

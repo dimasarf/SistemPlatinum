@@ -22,6 +22,7 @@ Route::GET('/tutor-baru', 'InputTutorController@index')->name('tutor-baru');
 Route::POST('/tutor-baruu', 'InputTutorController@save');
 Route::GET('/tutor-lihat', 'ViewTutorController@index');
 Route::GET('/jadwal-tutor/{id}','ViewTutorController@getJadwal');
+Route::GET('/jadwal-tutor/{id}/minggu/{date}','ViewTutorController@getJadwalWeekly');
 Route::GET('/mapel-baru', 'InputMapelController@index')->name('mapel-baru');
 Route::POST('/mapel-baru', 'InputMapelController@save');
 Route::GET('/mapel-lihat', 'ViewMapelController@index');
