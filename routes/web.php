@@ -42,3 +42,6 @@ Route::DELETE('kelas-hapus/{id}', 'ViewKelasController@delete');
 Route::GET('/jadwal-kelas/{id}','ViewKelasController@getJadwalKelas');
 Route::DELETE('/jadwal-hapus/{id}','ViewScheduleController@delete');
 Route::GET('/jadwal-get/{tanggal}', 'ViewScheduleController@getJadwal');
+
+Route::GET('/jadwal-edit/{id}', 'EditScheduleController@index');
+Route::POST('/jadwal-edit/{id}', 'EditScheduleController@save');

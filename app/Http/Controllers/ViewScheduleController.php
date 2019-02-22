@@ -52,4 +52,10 @@ class ViewScheduleController extends Controller
                   ->get();
         return $jadwals;
     }
+
+    public function edit($id, Request $request)
+    {
+        $jadwal = jadwal::find($id);
+        
+    }
 }

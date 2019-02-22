@@ -114,7 +114,7 @@
                   td.innerHTML=data[i][elements[j]];
                   td.className = elements2[j];
                   tdAksi = document.createElement('td');
-                  tdAksi.innerHTML = '<button type="button" class="btn btn-warning btn-sm btn-edit" data-toggle="modal" data-target="#exampleModal"> Edit </button>' +
+                  tdAksi.innerHTML = '<a class="btn btn-warning btn-sm btn-edit-jadwal" data-toggle="modal" data-target="#exampleModal"> Edit </a>' +
                                                     '<button type="button" class="btn btn-danger btn-sm btn-hapus-jadwal mt-1" data-token="{{ csrf_token() }}"> Hapus </button>';
                   tr.appendChild(td);                  
                   console.log(data[i][elements[j]]);
@@ -126,6 +126,13 @@
             }
           });
     });
+
+    $(document).on('click', '.btn-edit-jadwal', function()
+    {
+        var id = $(this).closest('tr').find('.id').text();
+        window.location.href = "/jadwal-edit/"+id;
+    })
+
     $(document).on('click', '.btn-hapus-kelas', function(e) {
         e.preventDefault() 
         if (confirm('Are you sure?')) {

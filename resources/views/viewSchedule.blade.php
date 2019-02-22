@@ -68,7 +68,7 @@
                                                     <span class="badge badge-complete">Complete</span>
                                                 </td> --}}
                                                 <td> 
-                                                    <button type="button" class="btn btn-warning btn-sm btn-edit" data-toggle="modal" data-target="#exampleModal"> Edit </button>
+                                                    <a href="/jadwal-edit/{{$jadwal->id}}" class="btn btn-warning btn-sm btn-edit"> Edit </a>
                                                     <button type="button" class="btn btn-danger btn-sm btn-hapus" data-token="{{ csrf_token() }}"> Hapus </button>
                                                 </td>
                                             </tr>                                         
@@ -87,20 +87,23 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Jadwal</h5>
+                        <input type="hidden" name="" id="idJadwal">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
+                            <form action="">
                                 <div class="form-group">
                                     <label class=" form-control-label">Jam</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fas fa-clock"></i></div>
                                         <select class="custom-select option-jam" id="option-jam">
-                                            <option value="17.00 - 18.30">17.00 - 18.30</option>
+                                            <option value="17.00 - 18.30" selected id="jam-selected">17.00 - 18.30</option>
+                                            <option value="17.00 - 18.30" >17.00 - 18.30</option>
                                             <option value="18.30 - 20.00">18.30 - 20.00</option>
-                                            <option value="20.30 - 22.00">20.30 - 22.00</option>
+                                            <option value="20.30 - 22.00">20.00 - 21.30</option>
                                         </select>
                                     </div>                                            
                                 </div>
@@ -109,6 +112,7 @@
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fas fa-users"></i></div>
                                         <select class="custom-select option-kelas" id="option-kelas">
+                                            <option value="" id="kelas-selected">Tes</option>
                                             @foreach($kelas as $kela)
                                                 <option value="{{$kela->id}}">{{$kela->kelas}}</option>
                                             @endforeach
@@ -120,6 +124,7 @@
                                     <div class="input-group">
                                         <div class="input-group-addon option-pelajaran"><i class="fas fa-book"></i></div>
                                         <select class="custom-select" id="option-pelajaran">
+                                            <option value="" id="mapel-selected">Tes</option>
                                             @foreach($mapels as $mapel)
                                                 <option value="{{$mapel->id}}">{{$mapel->mapel}}</option>
                                             @endforeach
@@ -127,10 +132,11 @@
                                     </div>                                            
                                 </div>
                                 <div class="form-group">
-                                    <label class=" form-control-label">Tentor</label>
+                                    <label class=" form-control-label">Tutor</label>
                                     <div class="input-group">
                                         <div class="input-group-addon option-tentor"><i class="fas fa-chalkboard-teacher"></i></div>
                                         <select class="custom-select" id="option-tentor">
+                                            <option value="" id="tentor-selected">TES</option>
                                             @foreach($tentors as $tentor)
                                                 <option value="{{$tentor->id}}">{{$tentor->tentor}}</option>
                                             @endforeach
@@ -138,8 +144,9 @@
                                     </div>
                                 </div>
                                 <div class="col text-center">
-                                    <button type="button" class="btn btn-primary btn-simpan" id=""><i class="far fa-save"></i>&nbsp; Simpan</button>
+                                    <button type="button" class="btn btn-primary btn-simpan-edit" id="" data-dismiss="modal" aria-label="Close"><i class="far fa-save"></i>&nbsp; Simpan</button>
                                 </div>
+                            </form>
                     </div>                    
                 </div>
             </div>
@@ -187,8 +194,37 @@
         var mapel = $(this).closest('tr').find('.mapel').text();
         var tentor = $(this).closest('tr').find('.tentor').text();
         var kelas = $(this).closest('tr').find('.kelas').text();
-        $('#option-jam').html(jam);
+        var id = $(this).closest('tr').find('.id').text();
+
+        $("#idJadwal").val(id);
+
+        $("#jam-selected").val(jam);
+        $("#jam-selected").html(jam);
+        
+
+        $("#kelas-selected").val(kelas);
+        $("#kelas-selected").html(kelas);
+        
+
+        $("#mapel-selected").val(mapel);
+        $("#mapel-selected").html(mapel);
+        
+
+        $("#tentor-selected").val(kelas);
+        $("#tentor-selected").html(kelas);
+        
     });
+
+    $(document).on('click', '.btn-simpan-edit', function()
+    {
+        var jam_selected = $("#jam-selected").val();
+        var kelas_selected = $("#kelas-selected").val();
+        var mapel_selected = $("#mapel-selected").val();
+        var tentor_selected = $("#tentor-selected").val();
+        var id = $("#idJadwal").val();
+        
+        
+    })
 
     $(document).on('click','.btn-hapus', function(){
         var id = $(this).closest('tr').find('.id').text();
