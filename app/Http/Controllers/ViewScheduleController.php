@@ -32,8 +32,24 @@ class ViewScheduleController extends Controller
         $n = 1;
         $kelas = kelas::all();
         $tentors = tentor::all();
-        $mapels = mapel::all();  
-        // return ($jadwal);
+        $mapels = mapel::all();
         return view('viewSchedule', compact('jadwals','n','kelas','tentors','mapels'));
+    }
+
+    public function delete($id)
+    {
+        return jadwal::destroy($id);
+    }
+
+    public function getJadwal($tanggal)
+    {
+        $jadwals = DB::table('jadwals')
+                  ->where('tanggal', $tanggal)
+                  ->join('mapels', 'jadwals.idMapel', '=', 'mapels.id')
+                  ->join('tentors', 'jadwals.idTentor', '=', 'tentors.id')
+                  ->join('kelas', 'jadwals.idKelas', '=', 'kelas.id')
+                  ->select('jadwals.*', 'tentors.tentor', 'mapels.mapel', 'kelas.kelas')
+                  ->get();
+        return $jadwals;
     }
 }

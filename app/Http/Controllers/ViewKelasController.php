@@ -28,4 +28,10 @@ class ViewKelasController extends Controller
                    ->get();
         return response()->json($jadwals);
     }
+
+    public function delete($id)
+    {
+        kelas::destroy($id);
+        return back();
+    }
 }

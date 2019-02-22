@@ -28,4 +28,10 @@ class ViewMapelController extends Controller
                    ->get();
         return response()->json($jadwals);
     }
+
+    public function delete($id)
+    {
+        mapel::destroy($id);
+        return back();
+    }
 }

@@ -40,7 +40,7 @@
                         </div>
                         <div class="card-body--">
                             <div class="table-stats order-table ov-h">
-                                <table class="table ">
+                                <table class="table " id="jadwal">
                                     <thead>
                                         <tr class="text-center">
                                             <th class="serial">ID</th>
@@ -56,8 +56,8 @@
                                     </thead>
                                     <tbody>
                                         @foreach($jadwals as $jadwal)                                            
-                                            <tr class="text-center">
-                                                <td class="mapel"> {{$jadwal->id}} </td>
+                                            <tr class="text-center baris">
+                                                <td class="id"> {{$jadwal->id}} </td>
                                                 <td class="serial tanggal">{{$jadwal->tanggal}}</td>
                                                 <td class="jam"> <span class="name">{{$jadwal->jam}}</span> </td>
                                                 <td class="mapel"> {{$jadwal->mapel}} </td>
@@ -69,7 +69,7 @@
                                                 </td> --}}
                                                 <td> 
                                                     <button type="button" class="btn btn-warning btn-sm btn-edit" data-toggle="modal" data-target="#exampleModal"> Edit </button>
-                                                    <button type="button" class="btn btn-danger btn-sm btn-hapus"> Hapus </button>
+                                                    <button type="button" class="btn btn-danger btn-sm btn-hapus" data-token="{{ csrf_token() }}"> Hapus </button>
                                                 </td>
                                             </tr>                                         
                                         @endforeach                                   
@@ -188,6 +188,55 @@
         var tentor = $(this).closest('tr').find('.tentor').text();
         var kelas = $(this).closest('tr').find('.kelas').text();
         $('#option-jam').html(jam);
+    });
+
+    $(document).on('click','.btn-hapus', function(){
+        var id = $(this).closest('tr').find('.id').text();
+        var tanggal = $(this).closest('tr').find('.tanggal').text();
+        var token = $(this).data("token");
+        $.ajax({
+            url: "/jadwal-hapus/"+id,
+            type: 'DELETE',
+            dataType: "JSON",
+            data: {
+                "id": id,
+                "_method": 'DELETE',
+                "_token": token,
+            },
+            success: function ()
+            {
+                $(".baris").remove();
+                var elements = ["id", "tanggal", "jam", "mapel", "tentor","kelas",''];
+                var elements2 = ["id", "tanggal", "jam", "mapel", "tentor","kelas",''];
+                $.ajax({
+                    method: 'GET',
+                    dataType: 'json',
+                    url: '/jadwal-get/'+tanggal,
+                    success : function (data) {
+                        console.log(data);
+                        for (var i = 0; i < data.length; i++) 
+                        {
+                            var td, tdAksi;
+                            var tr=document.createElement('tr');
+                            tr.className = "baris";
+                            for (var j=0; j < 6; ++j){
+                                td = document.createElement('td');
+                                td.innerHTML=data[i][elements[j]];
+                                td.className = elements2[j];
+                                tdAksi = document.createElement('td');
+                                tdAksi.innerHTML = '<button type="button" class="btn btn-warning btn-sm btn-edit" data-toggle="modal" data-target="#exampleModal"> Edit </button>'+
+                                                    '<button type="button" class="btn btn-danger btn-sm btn-hapus" data-token="{{ csrf_token() }}"> Hapus </button>';
+                                tr.appendChild(td);                  
+                                console.log(data[i][elements[j]]);
+                            }
+                            tr.appendChild(tdAksi);
+                            $('#jadwal').append(tr);
+                        }
+                    }
+                });
+            }
+        });
+
     });
 </script>
 @endsection

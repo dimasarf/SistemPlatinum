@@ -8,6 +8,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="box-title">Daftar tutor </h4>
+                        <input type="hidden" name="" id="idKelas">
                     </div>
                     <div class="card-body--">
                         <div class="table-stats order-table ov-h">
@@ -28,7 +29,11 @@
                                             <td class="mapel"> {{$kela->jumlahMurid}} </td>
                                             <td class="mr-4">
                                                 <button type="button" class="btn btn-warning btn-sm btn-jadwal" data-toggle="modal" data-target="#exampleModal"> Lihat jadwal </button>
-                                                <button type="button" class="btn btn-danger btn-sm btn-hapus mt-1"> Hapus </button>
+                                                <form action="/kelas-hapus/{{$kela->id}}" method="POST">
+                                                    @csrf
+                                                    {{ method_field('DELETE') }}
+                                                    <button type="button" class="btn btn-danger btn-sm btn-hapus-kelas mt-1"> Hapus </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -89,11 +94,13 @@
     $(document).on('click','.btn-jadwal', function(){
         var id = $(this).closest('tr').find('.id').text();
         var tentor = $(this).closest('tr').find('.mapel').text();
+        $('#idKelas').val(id);
         $.ajax({
             method: 'GET',
             dataType: 'json',
-            url: '/jadwal-mapel/' + id,
+            url: '/jadwal-kelas/' + id,
             success : function (data) {
+                
               $(".baris").remove();
               var elements = ["id", "tanggal", "jam", "tentor", "mapel",''];
               var elements2 = ["id", "tanggal", "jam", "tentor", "mapel",''];
@@ -108,7 +115,7 @@
                   td.className = elements2[j];
                   tdAksi = document.createElement('td');
                   tdAksi.innerHTML = '<button type="button" class="btn btn-warning btn-sm btn-edit" data-toggle="modal" data-target="#exampleModal"> Edit </button>' +
-                                                    '<button type="button" class="btn btn-danger btn-sm btn-hapus mt-1"> Hapus </button>';
+                                                    '<button type="button" class="btn btn-danger btn-sm btn-hapus-jadwal mt-1" data-token="{{ csrf_token() }}"> Hapus </button>';
                   tr.appendChild(td);                  
                   console.log(data[i][elements[j]]);
                 }               
@@ -118,6 +125,61 @@
             
             }
           });
+    });
+    $(document).on('click', '.btn-hapus-kelas', function(e) {
+        e.preventDefault() 
+        if (confirm('Are you sure?')) {
+            $(e.target).closest('form').submit() // Post the surrounding form
+        }
+    });
+
+    $(document).on('click', '.btn-hapus-jadwal', function()
+    {
+        var id = $(this).closest('tr').find('.id').text();
+        var token = $(this).data("token");
+        $.ajax({
+            url: "/jadwal-hapus/"+id,
+            type: 'DELETE',
+            dataType: "JSON",
+            data: {
+                "id": id,
+                "_method": 'DELETE',
+                "_token": token,
+            },
+            success: function ()
+            {
+                var idKelas = $('#idKelas').val();
+                $.ajax({
+                    method: 'GET',
+                    dataType: 'json',
+                    url: '/jadwal-kelas/' + idKelas,
+                    success : function (data) {
+                        // console.log(data)
+                        $(".baris").remove();
+                        var elements = ["id", "tanggal", "jam", "tentor", "mapel",''];
+                        var elements2 = ["id", "tanggal", "jam", "tentor", "mapel",''];
+                        for (var i = 0; i < data.length; i++) 
+                        {
+                            var td, tdAksi;
+                            var tr=document.createElement('tr');
+                            tr.className = "baris";
+                            for (var j=0; j < 5; ++j){
+                                td = document.createElement('td');
+                                td.innerHTML=data[i][elements[j]];
+                                td.className = elements2[j];
+                                tdAksi = document.createElement('td');
+                                tdAksi.innerHTML = '<button type="button" class="btn btn-warning btn-sm btn-edit" data-toggle="modal" data-target="#exampleModal"> Edit </button>' +
+                                                                    '<button type="button" class="btn btn-danger btn-sm btn-hapus-jadwal mt-1" data-token="{{ csrf_token() }}"> Hapus </button>';
+                                tr.appendChild(td);                  
+                                console.log(data[i][elements[j]]);
+                            }               
+                                tr.appendChild(tdAksi);
+                                $('#jadwalKelas').append(tr);
+                        }
+                    }
+                 });
+            }
+        });
     });
 </script>
 @endsection

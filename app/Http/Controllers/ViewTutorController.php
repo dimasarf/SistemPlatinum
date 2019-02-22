@@ -18,6 +18,7 @@ class ViewTutorController extends Controller
     public function index()
     {
         $tentors = tentor::paginate(5);
+        // $tentors = tentor::all();
         return view('viewTutor', compact('tentors'));
     }
 
@@ -48,9 +49,18 @@ class ViewTutorController extends Controller
                    ->join('kelas','jadwals.idKelas','=', 'kelas.id')
                    ->select('jadwals.*', 'kelas.kelas', 'mapels.mapel')
                    ->get();
-        // return Excel::download(new UsersExport($id, $date), 'users.xlsx');                   
         return response()->json($jadwals);
     }
 
+    public function delete($id)
+    {
+        tentor::destroy($id);
+        return back();
+    }
 
+    public function getTutors()
+    {
+        $tentors = tentor::paginate(5);
+        return response()->json($tentors);
+    }
 }

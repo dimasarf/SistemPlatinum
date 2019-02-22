@@ -12,7 +12,7 @@
                     </div>
                     <div class="card-body--">
                         <div class="table-stats order-table ov-h">
-                            <table class="table">
+                            <table class="table" id="tutor">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -24,7 +24,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($tentors as $tutor)
-                                        <tr>     
+                                        <tr class="baris-tutor">     
                                             <td class="id">{{$tutor->id}}</td>                                  
                                             <td class="avatar">
                                                 <div class="round-img">
@@ -35,7 +35,12 @@
                                             <td class="tglGabung">  {{$tutor->tglGabung}} </td>                                        
                                             <td class="mr-4">
                                                 <button type="button" class="btn btn-warning btn-sm btn-jadwal" data-toggle="modal" data-target="#exampleModal"> Lihat jadwal </button>
-                                                <button type="button" class="btn btn-danger btn-sm btn-hapus mt-1"> Hapus </button>
+                                                <form action="/tutor-hapus/{{$tutor->id}}" method="POST">
+                                                    @csrf
+                                                    {{ method_field('DELETE') }}
+                                                    <button type="button" class="btn btn-danger btn-sm btn-hapus-tutor mt-1" > Hapus </button>
+                                                </form>
+                                                
                                             </td>
                                         </tr>
                                     @endforeach
@@ -142,9 +147,9 @@
                   td.className = elements2[j];
                   tdAksi = document.createElement('td');
                   tdAksi.innerHTML = '<button type="button" class="btn btn-warning btn-sm btn-edit" data-toggle="modal" data-target="#exampleModal"> Edit </button>' +
-                                                    '<button type="button" class="btn btn-danger btn-sm btn-hapus mt-1"> Hapus </button>';
+                                                    '<button type="button" class="btn btn-danger btn-sm btn-hapus-jadwal mt-1" data-token="{{ csrf_token() }}"> Hapus </button>';
                   tr.appendChild(td);                  
-                  console.log(data[i][elements[j]]);
+                //   console.log(data[i][elements[j]]);
                 }               
                 tr.appendChild(tdAksi);
                 $('#jadwalTutor').append(tr);
@@ -185,9 +190,9 @@
                   td.className = elements2[j];
                   tdAksi = document.createElement('td');
                   tdAksi.innerHTML = '<button type="button" class="btn btn-warning btn-sm btn-edit" data-toggle="modal" data-target="#exampleModal"> Edit </button>' +
-                                                    '<button type="button" class="btn btn-danger btn-sm btn-hapus mt-1"> Hapus </button>';
+                                                    '<button type="button" class="btn btn-danger btn-sm btn-hapus-jadwal mt-1" data-token="{{ csrf_token() }}"> Hapus </button>';
                   tr.appendChild(td);                  
-                  console.log(data[i][elements[j]]);
+                  
                 }               
                 tr.appendChild(tdAksi);
                 $('#jadwalTutor').append(tr);
@@ -198,6 +203,61 @@
           });
          
     });
-    
+    $(document).on('click', '.btn-hapus-tutor', function(e) {
+        e.preventDefault() 
+        if (confirm('Are you sure?')) {
+            // Post the form
+            $(e.target).closest('form').submit() // Post the surrounding form
+        }
+    });
+
+    $(document).on('click', '.btn-hapus-jadwal', function()
+    {
+        var id = $(this).closest('tr').find('.id').text();
+        // alert(id);
+        var token = $(this).data("token");
+        $.ajax({
+            url: "/jadwal-hapus/"+id,
+            type: 'DELETE',
+            dataType: "JSON",
+            data: {
+                "id": id,
+                "_method": 'DELETE',
+                "_token": token,
+            },
+            success: function ()
+            {
+                var idTutor = $('#idTutor').val();
+                $.ajax({
+                    method: 'GET',
+                    dataType: 'json',
+                    url: '/jadwal-tutor/' + idTutor,
+                    success : function (data) {
+                        $(".baris").remove();
+                        var elements = ["id", "tanggal", "jam", "mapel", "kelas",''];
+                        var elements2 = ["id", "tanggal", "jam", "mapel", "kelas",''];
+                        for (var i = 0; i < data.length; i++) 
+                        {
+                            var td, tdAksi;
+                            var tr=document.createElement('tr');
+                            tr.className = "baris";
+                            for (var j=0; j < 5; ++j){
+                                td = document.createElement('td');
+                                td.innerHTML=data[i][elements[j]];
+                                td.className = elements2[j];
+                                tdAksi = document.createElement('td');
+                                tdAksi.innerHTML = '<button type="button" class="btn btn-warning btn-sm btn-edit" data-toggle="modal" data-target="#exampleModal"> Edit </button>' +
+                                                                    '<button type="button" class="btn btn-danger btn-sm btn-hapus-jadwal mt-1" data-token="{{ csrf_token() }}"> Hapus </button>';
+                                tr.appendChild(td);                  
+                                console.log(data[i][elements[j]]);
+                            }               
+                                tr.appendChild(tdAksi);
+                                $('#jadwalTutor').append(tr);
+                        }
+                    }
+                 });
+            }
+        });
+    });
 </script>
 @endsection
