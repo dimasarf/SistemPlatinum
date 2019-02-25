@@ -29,6 +29,16 @@
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
 
    <style>
+      .modal-full {
+    min-width: 100%;
+    margin: 0;
+    margin-right: -5em;
+}
+
+.modal-full .modal-content {
+    min-height: 100vh;
+    margin: 0;
+}
     #weatherWidget .currentDesc {
         color: #ffffff!important;
     }
@@ -185,9 +195,10 @@
                     <div class="header-left">
                         <button class="search-trigger"><i class="fa fa-search"></i></button>
                         <div class="form-inline">
-                            <form class="search-form">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
-                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+                            <form class="search-form" action="/pencarian" method="POST">
+                                @csrf
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search" name="keyword">
+                                <button  type="submit"><i class="fa fa-search"></i></button>\
                             </form>
                         </div>
 
@@ -301,7 +312,7 @@
         <!-- /.site-footer -->
     </div>
     <!-- /#right-panel -->
-
+    
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>

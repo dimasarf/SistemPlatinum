@@ -29,6 +29,7 @@ class ViewTutorController extends Controller
                    ->join('mapels','jadwals.idMapel','=','mapels.id')
                    ->join('kelas','jadwals.idKelas','=', 'kelas.id')
                    ->select('jadwals.*', 'kelas.kelas', 'mapels.mapel')
+                   ->orderBy('jadwals.tanggal', 'DESC')
                    ->get();
         return response()->json($jadwals);
     }

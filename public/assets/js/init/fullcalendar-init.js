@@ -127,6 +127,7 @@
                             console.log(data[i][elements[j]]);
                         }
                         $('#jadwal').append(tr);
+                        // $('#jadwal-modal').append(tr);
                     }
                 }
             })

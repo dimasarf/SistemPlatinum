@@ -10,6 +10,7 @@ use App\kelas;
 use App\mapel;
 use DB;
 use Carbon\Carbon;
+use Carbon\CarbonTimeZone;
 
 class IndexController extends Controller
 {
@@ -19,7 +20,8 @@ class IndexController extends Controller
         $tutors = tentor::count();
         $kelas = kelas::count();
         $mapels = mapel::count();
-        
+        // CarbonTimeZone::create('Asia/Jakarta');
+        $timestamp = '2014-02-06 16:34:00';
         $tanggal = Carbon::today()->format('Y-m-d');
         $jadwal_Today = DB::table('jadwals')
                         ->where('jadwals.tanggal','=',  $tanggal)

@@ -50,3 +50,4 @@ Route::GET('/jadwal-get/{tanggal}', 'ViewScheduleController@getJadwal');
 
 Route::GET('/jadwal-edit/{id}', 'EditScheduleController@index');
 Route::POST('/jadwal-edit/{id}', 'EditScheduleController@save');
+Route::POST('/pencarian', 'PencarianController@index');

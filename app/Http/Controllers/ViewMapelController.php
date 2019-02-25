@@ -25,6 +25,7 @@ class ViewMapelController extends Controller
                    ->join('tentors','jadwals.idTentor','=', 'tentors.id')
                    ->join('kelas', 'jadwals.idKelas','=','kelas.id')
                    ->select('jadwals.*','tentors.tentor','kelas.kelas')
+                   ->orderBy('jadwals.tanggal', 'DESC')
                    ->get();
         return response()->json($jadwals);
     }

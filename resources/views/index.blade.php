@@ -10,7 +10,14 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 <script src="/assets/js/init/fullcalendar-init.js"></script>
 <style>
+.modal-full {
+    min-width: 100%;
+    margin: 0;
+}
 
+.modal-full .modal-content {
+    min-height: 100vh;
+}
 </style>
 <div class="animated fadeIn">
     <!-- Widgets  -->
@@ -95,7 +102,13 @@
         <div class="col-xl-8">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="box-title">Orders </h4>
+                    <div class="form-inline">
+                        <h4 class="box-title">Orders </h4>
+                        
+                        <button type="button" class="btn btn-primary ml-5 float-right" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fas fa-external-link-alt"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="card-body--">
                     <div class="table-stats order-table ov-h">
@@ -150,10 +163,7 @@
             </div>
         </div> <!-- /.col-md-4 -->
     </div>
-</div>
-<!-- /.orders -->
-
-<div class="modal fade none-border" id="event-modal">
+    {{-- <div class="modal fade none-border fullscreen" id="event-modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -168,7 +178,53 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+    <div class="container-fluid">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-full ml-2" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Jadwal Bimbel Platinum</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-stats order-table ov-h">
+                            <table class="table " id="jadwal-modal">
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <th>Jam</th>
+                                        <th>Kelas</th>
+                                        <th>Tutor</th>
+                                        <th>Mapel</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($jadwal_Today as $jadwal)
+                                        <tr class="baris">
+                                            <td> {{$jadwal->tanggal}} </td>
+                                            <td> {{$jadwal->jam}} </td>
+                                            <td> {{$jadwal->kelas}} </td>
+                                            <td>{{$jadwal->tentor}}</td>
+                                            <td>{{$jadwal->mapel}}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div> 
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    
+   
+</div>
+<!-- /.orders -->
+
+
 <script>
 
 
