@@ -112,6 +112,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Jadwal</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fas fa-pencil-alt"></i><a href="/jadwal-baru">Jadwal Baru</a></li>
+                            <li><i class="fas fa-pencil-alt"></i><a href="/jadwal-khusus">Jadwal Khusus</a></li>
                             <li><i class="fas fa-eye"></i></i><a href="/jadwal-lihat">Lihat Jadwal</a></li>
                         </ul>
                     </li>

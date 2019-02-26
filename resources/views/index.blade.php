@@ -9,7 +9,36 @@
 <script src='/Calendar/fullcalendar.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 <script src="/assets/js/init/fullcalendar-init.js"></script>
+<!--===============================================================================================-->	
+<link rel="icon" type="image/png" href="/table/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/table/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/table/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/table/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/table/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/table/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/table/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/table/css/main.css">
+<!--===============================================================================================-->
 <style>
+.font-tabel
+{
+    color: #ecf0f1;
+    font-weight: 500;
+}
+.header-jadwal
+{
+    background: #f1c40f;
+}
+.row-jadwal
+{
+    background: #292f54;
+}
 .modal-full {
     min-width: 100%;
     margin: 0;
@@ -103,7 +132,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-inline">
-                        <h4 class="box-title">Orders </h4>
+                        <h4 class="box-title">Jadwal Hari Ini </h4>
                         
                         <button type="button" class="btn btn-primary ml-5 float-right" data-toggle="modal" data-target="#exampleModal">
                             <i class="fas fa-external-link-alt"></i>
@@ -184,13 +213,14 @@
                 <div class="modal-dialog modal-full ml-2" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Jadwal Bimbel Platinum</h5>
+                        <img src="/logo.jpg" alt="" srcset="" height="100px" width="100px">
+                      <h3 class="modal-title ml-4" id="exampleModalLabel">Jadwal Hari Ini</h3>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body">
-                        <div class="table-stats order-table ov-h">
+                    <div class="modal-body" >
+                        {{-- <div class="table-stats order-table ov-h">
                             <table class="table " id="jadwal-modal">
                                 <thead>
                                     <tr>
@@ -213,7 +243,38 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div> 
+                        </div>  --}}
+                        <div class="table100 ver1 m-b-110 ">
+                            <div class="table100-head">
+                                <table>
+                                    <thead>
+                                        <tr class="row100 head">
+                                            <th class="cell100 column1 ">Tanggal</th>
+                                            <th class="cell100 column2 ">Jam</th>
+                                            <th class="cell100 column3 ">Kelas</th>
+                                            <th class="cell100 column4 ">Tutor</th>
+                                            <th class="cell100 column5 ">Mapel</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+        
+                            <div class="table100-body row-jadwal ">
+                                <table>
+                                    <tbody>
+                                        @foreach($jadwal_Today as $jadwal)
+                                            <tr class="row100 body">
+                                                <td class="cell100 column1"><p class="font-tabel">{{$jadwal->tanggal}}</p> </td>
+                                                <td class="cell100 column2"><p class="font-tabel">{{$jadwal->jam}}</p> </td>
+                                                <td class="cell100 column3"><p class="font-tabel">{{$jadwal->kelas}}</p> </td>
+                                                <td class="cell100 column4"><p class="font-tabel">{{$jadwal->tentor}}</p> </td>
+                                                <td class="cell100 column5"><p class="font-tabel">{{$jadwal->mapel}}</p> </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                     
                 </div>

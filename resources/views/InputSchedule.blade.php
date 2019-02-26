@@ -20,7 +20,11 @@
                     <strong>Masked Input</strong> <small> Small Text Mask</small>
                 </div>
                 <div class="card-body card-block">
-                    <form action="/displayForm" method="POST">
+                    @if($khusus == true)
+                        <form action="/displayFormKhusus" method="POST">
+                    @else
+                        <form action="/displayForm" method="POST">
+                    @endif
                         @csrf
                         <div class="form-group">
                             <label class=" form-control-label">Tanggal</label>
@@ -65,11 +69,15 @@
                                     <label class=" form-control-label">Jam</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fas fa-clock"></i></div>
-                                        <select class="custom-select option-jam" id="option-jam-{{$i}}">
-                                            <option value="17.00 - 18.30">17.00 - 18.30</option>
-                                            <option value="18.30 - 20.00">18.30 - 20.00</option>
-                                            <option value="20.00 - 21.30">20.00 - 21.30</option>
-                                        </select>
+                                        @if($khusus == true)
+                                            <input class="form-control" type="text" name="" id="option-jam-{{$i}}">
+                                        @else
+                                            <select class="custom-select option-jam" id="option-jam-{{$i}}">
+                                                <option value="17.00 - 18.30">17.00 - 18.30</option>
+                                                <option value="18.30 - 20.00">18.30 - 20.00</option>
+                                                <option value="20.00 - 21.30">20.00 - 21.30</option>
+                                            </select>
+                                        @endif
                                     </div>                                            
                                 </div>
                                 <div class="form-group">
@@ -106,7 +114,11 @@
                                     </div>
                                 </div>
                                 <div class="col text-center">
-                                    <button type="button" class="btn btn-primary btn-simpan" id="{{$i}}"><i class="far fa-save"></i>&nbsp; Simpan</button>
+                                    @if($khusus == true)
+                                        <button type="button" class="btn btn-warning btn-simpan-khusus" id="{{$i}}"><i class="far fa-save"></i>&nbsp; Simpan</button>
+                                    @else
+                                        <button type="button" class="btn btn-primary btn-simpan" id="{{$i}}"><i class="far fa-save"></i>&nbsp; Simpan</button>
+                                    @endif
                                 </div>
                                 <div class="sufee-alert alert with-close alert-success alert-dismissible fade show mt-1 sembunyi" id="berhasil-{{$i}}">
                                     Jadwal Berhasil Disimpan!
@@ -341,6 +353,39 @@
             });
             var id = this.id;
             var jam = $('#option-jam-'+id).find(":selected").text();
+            var kelas = $('#option-kelas-'+id).val();
+            var mapel = $('#option-pelajaran-'+id).val();
+            var tentor = $('#option-tentor-'+id).val();
+            var tanggal = $('#tanggal').val();
+            $.ajax({
+                    /* the route pointing to the post function */
+                    url: '/save-jadwal',
+                    type: 'GET',
+                    /* send the csrf-token and the input to the controller */
+                    data: {tentor : tentor, jam : jam, kelas : kelas, mapel : mapel, tanggal : tanggal},                    
+                    dataType: 'JSON',
+                    /* remind that 'data' is the response of the AjaxController */
+                    success: function (data) {
+                        $('#berhasil-'+id).removeClass('sembunyi');
+                        $('#berhasil-'+id).addClass('tampil');
+                        $('#'+id).removeClass('btn-primary');
+                    },
+                    error: function (data) {
+                        $('#gagal-'+id).removeClass('sembunyi');
+                        $('#gagal-'+id).addClass('tampil');
+                        console.log(data);
+                    }
+            });
+        });
+
+        $(".btn-simpan-khusus").on('click',function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('konten')
+                }
+            });
+            var id = this.id;
+            var jam = $('#option-jam-'+id).val();
             var kelas = $('#option-kelas-'+id).val();
             var mapel = $('#option-pelajaran-'+id).val();
             var tentor = $('#option-tentor-'+id).val();

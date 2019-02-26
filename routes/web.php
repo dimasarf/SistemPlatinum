@@ -11,18 +11,17 @@
 |
 */
 
-Route::get('/jadwal-baru', function () {
-    return view('InputSchedule');
-});
+Route::get('/jadwal-baru', 'InputScheduluController@index');
 
 Route::get('/', 'IndexController@index');
 
 Route::POST('/displayForm', 'InputScheduluController@displayForm');
+Route::POST('/displayFormKhusus', 'InputScheduluController@displayFormKhusus');
 Route::GET('/save-jadwal', 'InputScheduluController@storeJadwal');
 Route::GET('/jadwal-lihat', 'ViewScheduleController@index');
 Route::POST('/jadwal-cari', 'ViewScheduleController@cariJadwal');
 Route::GET('/jadwal/{date}', 'IndexController@getJadwalByDate');
-
+Route::GET('/jadwal-khusus', 'InputScheduluController@indexKhusus');
 
 Route::GET('/tutor-baru', 'InputTutorController@index')->name('tutor-baru');
 Route::POST('/tutor-baruu', 'InputTutorController@save');
