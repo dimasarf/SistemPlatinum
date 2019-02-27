@@ -1,7 +1,7 @@
 @extends('layouts.DashboardLayout')
 @section('konten')
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-<div class="animated fadeIn">      
+<div class="animated fadeIn">
     <div class="clearfix"></div>
     <div class="row">
         <div class="col-xs-6 col-sm-6 mx-auto col-lg-6">
@@ -27,8 +27,6 @@
             </div>
         </div>
     </div>
-    
-  
     <!-- Orders -->
     @if(!empty($jadwals))    
         <div class="orders">

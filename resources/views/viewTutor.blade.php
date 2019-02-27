@@ -7,6 +7,7 @@
     background-color: #ffc43a;
 }
 </style>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <div class="animated fadeIn">
         <div class="clearfix"></div>
         <div class="row">
@@ -271,7 +272,7 @@
               var elements2 = ["id", "tanggal", "jam", "mapel", "kelas",''];
               for (var i = 0; i < data.length; i++) 
               {
-                var td, tdAksi;
+                var td, tdAksi; 
                 var tr=document.createElement('tr');
                 tr.className = "baris";
                 for (var j=0; j < 5; ++j){

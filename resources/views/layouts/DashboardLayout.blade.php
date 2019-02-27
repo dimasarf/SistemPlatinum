@@ -134,7 +134,18 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fas fa-school"></i>Kelas</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fas fa-pencil-alt"></i><a href="/kelas-baru">Kelas Baru</a></li>
-                            <li><i class="fas fa-eye"></i></i><a href="/kelas-lihat">Lihat Mapel</a></li>
+                            <li><i class="fas fa-eye"></i></i><a href="/kelas-lihat">Lihat Kelas</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fas fa-users"></i>Siswa</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fas fa-pencil-alt"></i><a href="/murid-baru-smp">Siswa SMP Baru</a></li>
+                            <li><i class="fas fa-pencil-alt"></i><a href="/murid-baru-sma">Siswa SMA Baru</a></li>
+                            <li><i class="fas fa-pencil-alt"></i><a href="/murid-baru-smk">Siswa SMK Baru</a></li>
+                            <li><i class="fas fa-eye"></i></i><a href="/murid-lihat-smp">Lihat siswa SMP </a></li>
+                            <li><i class="fas fa-eye"></i></i><a href="/murid-lihat-sma">Lihat siswa SMA </a></li>
+                            <li><i class="fas fa-eye"></i></i><a href="/murid-lihat-smk">Lihat siswa SMK </a></li>
                         </ul>
                     </li>
 

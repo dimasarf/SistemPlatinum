@@ -50,3 +50,14 @@ Route::GET('/jadwal-get/{tanggal}', 'ViewScheduleController@getJadwal');
 Route::GET('/jadwal-edit/{id}', 'EditScheduleController@index');
 Route::POST('/jadwal-edit/{id}', 'EditScheduleController@save');
 Route::POST('/pencarian', 'PencarianController@index');
+
+Route::GET('/murid-baru-smp', 'MuridBaruController@indexSMP');
+Route::GET('/murid-baru-sma', 'MuridBaruController@indexSMA');
+Route::GET('/murid-baru-smk', 'MuridBaruController@indexSMK');
+Route::POST('/murid-baru', 'MuridBaruController@store');
+
+Route::GET('/murid-lihat-smp', 'ViewSiswaController@indexSMP');
+Route::GET('/murid-lihat-sma', 'ViewSiswaController@indexSMA');
+Route::GET('/murid-lihat-smk', 'ViewSiswaController@indexSMK');
+
+Route::GET('/murid-profil/{id}', 'ProfilController@index');
