@@ -134,14 +134,51 @@
                     <div class="form-inline">
                         <h4 class="box-title">Jadwal Hari Ini </h4>
                         
-                        <button type="button" class="btn btn-primary ml-5 float-right" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-primary ml-5 float-right" data-toggle="modal" data-target="#exampleModal" id="full">
                             <i class="fas fa-external-link-alt"></i>
                         </button>
                     </div>
                 </div>
                 <div class="card-body--">
                     <div class="table-stats order-table ov-h">
-                        <table class="table " id="jadwal">
+                        <div >
+                            <div class="table100 ver1 m-b-110 ">
+                                <div id="jadwal-index">
+                                <div class="table100-head" >
+                                    <table>
+                                        <thead>
+                                            <tr class="row100 head">
+                                                <th class="cell100 column1 ">Tanggal</th>
+                                                <th class="cell100 column2 ">Jam</th>
+                                                <th class="cell100 column3 ">Kelas</th>
+                                                <th class="cell100 column4 ">Tutor</th>
+                                                <th class="cell100 column5 ">Mapel</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+            
+                                <div class="table100-body row-jadwal ">
+                                    <table id="jadwal">
+                                        <tbody id="body-modal">
+                                            <div >
+                                            @foreach($jadwal_Today as $jadwal)
+                                                <tr class="row100 body baris" id="baris-modal">
+                                                    <td class="cell100 column1"><p class="font-tabel">{{$jadwal->tanggal}}</p> </td>
+                                                    <td class="cell100 column2"><p class="font-tabel">{{$jadwal->jam}}</p> </td>
+                                                    <td class="cell100 column3"><p class="font-tabel">{{$jadwal->kelas}}</p> </td>
+                                                    <td class="cell100 column4"><p class="font-tabel">{{$jadwal->tentor}}</p> </td>
+                                                    <td class="cell100 column5"><p class="font-tabel">{{$jadwal->mapel}}</p> </td>
+                                                </tr>
+                                            @endforeach
+                                            </div>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- <table class="table " id="jadwal">
                             <thead>
                                 <tr>
                                     <th>Tanggal</th>
@@ -151,9 +188,10 @@
                                     <th>Mapel</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="body-index">
+                                <div >
                                 @foreach($jadwal_Today as $jadwal)
-                                    <tr class="baris">
+                                    <tr class="baris" id="baris-index">
                                         <td> {{$jadwal->tanggal}} </td>
                                         <td> {{$jadwal->jam}} </td>
                                         <td> {{$jadwal->kelas}} </td>
@@ -161,8 +199,9 @@
                                         <td>{{$jadwal->mapel}}</td>
                                     </tr>
                                 @endforeach
+                                </div>
                             </tbody>
-                        </table>
+                        </table> --}}
                     </div> <!-- /.table-stats -->
                 </div>
             </div> <!-- /.card -->
@@ -219,7 +258,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body" >
+                    <div class="modal-body" id="body-modal">
                         {{-- <div class="table-stats order-table ov-h">
                             <table class="table " id="jadwal-modal">
                                 <thead>
@@ -244,37 +283,43 @@
                                 </tbody>
                             </table>
                         </div>  --}}
-                        <div class="table100 ver1 m-b-110 ">
-                            <div class="table100-head">
-                                <table>
-                                    <thead>
-                                        <tr class="row100 head">
-                                            <th class="cell100 column1 ">Tanggal</th>
-                                            <th class="cell100 column2 ">Jam</th>
-                                            <th class="cell100 column3 ">Kelas</th>
-                                            <th class="cell100 column4 ">Tutor</th>
-                                            <th class="cell100 column5 ">Mapel</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-        
-                            <div class="table100-body row-jadwal ">
-                                <table>
-                                    <tbody>
-                                        @foreach($jadwal_Today as $jadwal)
-                                            <tr class="row100 body">
-                                                <td class="cell100 column1"><p class="font-tabel">{{$jadwal->tanggal}}</p> </td>
-                                                <td class="cell100 column2"><p class="font-tabel">{{$jadwal->jam}}</p> </td>
-                                                <td class="cell100 column3"><p class="font-tabel">{{$jadwal->kelas}}</p> </td>
-                                                <td class="cell100 column4"><p class="font-tabel">{{$jadwal->tentor}}</p> </td>
-                                                <td class="cell100 column5"><p class="font-tabel">{{$jadwal->mapel}}</p> </td>
+                        {{-- <div id="jadwal-modal"> --}}
+                            <div class="table100 ver1 m-b-110 " >
+                                <div id="jadwal-modal">
+                                {{-- <div class="table100-head" > --}}
+                                    {{-- <table>
+                                        <thead>
+                                            <tr class="row100 head">
+                                                <th class="cell100 column1 ">Tanggal</th>
+                                                <th class="cell100 column2 ">Jam</th>
+                                                <th class="cell100 column3 ">Kelas</th>
+                                                <th class="cell100 column4 ">Tutor</th>
+                                                <th class="cell100 column5 ">Mapel</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                    </table>
+                                </div>
+            
+                                <div class="table100-body row-jadwal ">
+                                    <table>
+                                        <tbody id="body-modal">
+                                            <div >
+                                            @foreach($jadwal_Today as $jadwal)
+                                                <tr class="row100 body" id="baris-modal">
+                                                    <td class="cell100 column1"><p class="font-tabel">{{$jadwal->tanggal}}</p> </td>
+                                                    <td class="cell100 column2"><p class="font-tabel">{{$jadwal->jam}}</p> </td>
+                                                    <td class="cell100 column3"><p class="font-tabel">{{$jadwal->kelas}}</p> </td>
+                                                    <td class="cell100 column4"><p class="font-tabel">{{$jadwal->tentor}}</p> </td>
+                                                    <td class="cell100 column5"><p class="font-tabel">{{$jadwal->mapel}}</p> </td>
+                                                </tr>
+                                            @endforeach
+                                            </div>
+                                        </tbody>
+                                    </table> --}}
+                                {{-- </div> --}}
+                                </div>
                             </div>
-                        </div>
+                        {{-- </div> --}}
                     </div>
                     
                 </div>
@@ -285,9 +330,13 @@
 </div>
 <!-- /.orders -->
 
-
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
-
+$('#full').click(function()
+{
+    // ('#body-modal').empty();
+    $('#jadwal-index').clone().appendTo('#jadwal-modal');
+})
 
       
 

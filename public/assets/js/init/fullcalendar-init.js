@@ -121,11 +121,14 @@
                         tr.className = "baris";
                         for (var j=0; j < 5; ++j){
                             td = document.createElement('td');
-                            td.innerHTML=data[i][elements[j]];
-                            td.className = elements2[j];
+                            td.innerHTML='<p class="font-tabel">'+data[i][elements[j]]+'</p>';
+
+                            td.className = elements2[j] + ' '+ ' cell100'+ ' '+'column'+(j+1);
+                            
                             tr.appendChild(td);
                             console.log(data[i][elements[j]]);
                         }
+                        $('.baris').addClass('font-tabel');
                         $('#jadwal').append(tr);
                         // $('#jadwal-modal').append(tr);
                     }

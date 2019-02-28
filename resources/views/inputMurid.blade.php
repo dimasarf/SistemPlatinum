@@ -139,12 +139,28 @@
                                     <input name="asal_sekolah" placeholder="Asal Sekolah" class="name" required />
                                 </div>
                                 <div class="form-group">
+                                    @if($jenjang == 'SMK')
+                                        <label class=" form-control-label">Jurusan</label>
+                                        <input name="jurusan" placeholder="Jurusan" class="name" required />
+                                    @elseif($jenjang == 'SMA')
+                                        <label class=" form-control-label">Kelas</label>
+                                        <select class="form-control" id="exampleFormControlSelect1" name="jurusan">
+                                            <option value="X IPS">X IPS</option>
+                                            <option value="X IPA">X IPA</option>
+                                            <option value="XI IPS">XI IPS</option>
+                                            <option value="XI IPA"> XI IPA</option>
+                                            <option value="XII IPS">XII IPS</option>
+                                            <option value="XII IPA">XII IPA</option>
+                                        </select>
+                                    @endif
+                                </div>
+                                <div class="form-group">
                                     <label class=" form-control-label">Hari yang Dipilih</label>
                                     <select class="form-control" id="exampleFormControlSelect1" name="hari">
                                         <option value="Senin - Kamis">Senin - Kamis</option>
                                         <option value="Selasa - Jumat">Selasa - Jumat</option>
                                     </select>
-                                    <input name="lainnya" placeholder="lainnya" class="name" required />
+                                    {{-- <input name="lainnya" placeholder="lainnya" class="name" required /> --}}
                                 </div>
                                 <div class="form-group">
                                     <label class=" form-control-label">Jam yang Dipilih</label>
@@ -190,7 +206,7 @@
                                     <input name="id" placeholder="Nama Lengkap" class="name" required />
                                 </div>
                                 <div class="form-group">
-                                    <label class=" form-control-label">No Kuiransi</label>
+                                    <label class=" form-control-label">No Kuitansi</label>
                                     <input name="kuitansi" placeholder="Nama Lengkap" class="name" required />
                                 </div>
                                 <div class="form-group">
@@ -203,16 +219,18 @@
                                         <option value="Lainnya">Lainnya</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Diskon</label>
-                                    <select class="form-control" id="exampleFormControlSelect1" name="diskon">
-                                        <option value="Event">Event</option>
-                                        <option value="Alumni">Alumni</option>
-                                        <option value="Lunas">Lunas</option>
-                                        <option value="Referensi">Referensi</option>
-                                        <option value="Budha">Budha</option>
-                                    </select>
-                                </div>
+                                @if($jenjang!= 'SMK')
+                                    <div class="form-group">
+                                        <label class=" form-control-label">Diskon</label>
+                                        <select class="form-control" id="exampleFormControlSelect1" name="diskon">
+                                            <option value="Event">Event</option>
+                                            <option value="Alumni">Alumni</option>
+                                            <option value="Lunas">Lunas</option>
+                                            <option value="Referensi">Referensi</option>
+                                            <option value="Budha">Budha</option>
+                                        </select>
+                                    </div>
+                                @endif
                                 <div class="form-group">
                                     <label class=" form-control-label">Metode Pembayaran</label>
                                     <select class="form-control" id="exampleFormControlSelect1" name="metode">

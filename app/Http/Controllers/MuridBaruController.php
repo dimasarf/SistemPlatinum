@@ -32,7 +32,7 @@ class MuridBaruController extends Controller
     public function store(Request $request)
     {
         $siswa = new siswa();
-        $siswa->id =  $request->id;
+        $siswa->id_siswa =  $request->id;
         $siswa->nama_lengkap = $request->nama_lengkap ;
         $siswa->nama_panggilan = $request->nama_panggilan ;
         $siswa->tempat_lahir = $request->tempat_lahir ;
@@ -58,6 +58,7 @@ class MuridBaruController extends Controller
         $siswa->jenis_pembayaran = $request->jenis ;
         $siswa->jenjang = $request->jenjang ;
         $siswa->kuitansi = $request->kuitansi;
+        $siswa->jurusan = $request->jurusan;
         $siswa->save();
         $request->session()->flash('status', 'Data Berhasil Disimpan!');
         return back();
