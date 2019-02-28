@@ -30,10 +30,10 @@
 
    <style>
       .modal-full {
-    min-width: 100%;
-    margin: 0;
-    margin-right: -5em;
-}
+        min-width: 100%;
+        margin: 0;
+        margin-right: -5em;
+    }
 
 .modal-full .modal-content {
     min-height: 100vh;
@@ -146,6 +146,13 @@
                             <li><i class="fas fa-eye"></i></i><a href="/murid-lihat-smp">Lihat siswa SMP </a></li>
                             <li><i class="fas fa-eye"></i></i><a href="/murid-lihat-sma">Lihat siswa SMA </a></li>
                             <li><i class="fas fa-eye"></i></i><a href="/murid-lihat-smk">Lihat siswa SMK </a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fas fa-money-check-alt"></i>Pembayaran</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fas fa-pencil-alt"></i><a href="/pembayaran">Pembayaran Baru</a></li>
+                            <li><i class="fas fa-eye"></i></i><a href="/pembayaran-sejarah">Sejarah Pembayaran</a></li>
                         </ul>
                     </li>
 

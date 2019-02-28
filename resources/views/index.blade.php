@@ -140,7 +140,7 @@
                     </div>
                 </div>
                 <div class="card-body--">
-                    <div class="table-stats order-table ov-h">
+                    <div class="d">
                         <div >
                             <div class="table100 ver1 m-b-110 ">
                                 <div id="jadwal-index">
@@ -334,7 +334,6 @@
 <script>
 $('#full').click(function()
 {
-    // ('#body-modal').empty();
     $('#jadwal-index').clone().appendTo('#jadwal-modal');
 })
 

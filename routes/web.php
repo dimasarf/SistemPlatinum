@@ -61,3 +61,10 @@ Route::GET('/murid-lihat-sma', 'ViewSiswaController@indexSMA');
 Route::GET('/murid-lihat-smk', 'ViewSiswaController@indexSMK');
 
 Route::GET('/murid-profil/{id}', 'ProfilController@index');
+Route::GET('/pembayaran', 'PembayaranController@index');
+Route::GET('/pembayaran-sejarah', 'PaymentHistoryController@index');
+Route::POST('/pembayaran-cari', 'PaymentHistoryController@cari');
+Route::POST('/pembayaran-murid-cari', 'PembayaranController@cari');
+
+Route::GET('/bayar/{id}', 'BayarController@index');
+Route::POST('/bayar/{id}', 'BayarController@bayar');
