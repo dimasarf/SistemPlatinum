@@ -11,6 +11,7 @@ use App\mapel;
 use DB;
 use Carbon\Carbon;
 use Carbon\CarbonTimeZone;
+use App\siswa;
 
 class IndexController extends Controller
 {
@@ -20,8 +21,15 @@ class IndexController extends Controller
         $tutors = tentor::count();
         $kelas = kelas::count();
         $mapels = mapel::count();
-        // CarbonTimeZone::create('Asia/Jakarta');
+        $jumlahSMP = DB::table('siswas')->where('jenjang','SMP')->count();
+        $jumlahSMA = DB::table('siswas')->where('jenjang','SMA')->count();
+        $jumlahSMK = DB::table('siswas')->where('jenjang','SMK')->count();
         $timestamp = '2014-02-06 16:34:00';
+        $jumlahSiswa = siswa::count();
+        $rencanaSMK = siswa::getRencanaJenjang('SMK');
+        $rencanaSMA = json_decode(siswa::getRencanaJenjang('SMA'));
+        $rencanaSMP = siswa::getRencanaJenjang('SMP');
+        
         $tanggal = Carbon::today()->format('Y-m-d');
         $jadwal_Today = DB::table('jadwals')
                         ->where('jadwals.tanggal','=',  $tanggal)
@@ -30,7 +38,8 @@ class IndexController extends Controller
                         ->join('tentors', 'jadwals.idTentor', '=', 'tentors.id')
                         ->select('jadwals.*', 'kelas.kelas', 'mapels.mapel', 'tentors.tentor')
                         ->get();
-        return view('index', compact('jadwals','tutors', 'mapels', 'kelas', 'jadwal_Today'));
+        // return $rencanaSMK;
+        return view('index', compact('jadwals','tutors', 'mapels', 'kelas', 'jadwal_Today','jumlahSMP','jumlahSMA','jumlahSMK','jumlahSiswa','rencanaSMK','rencanaSMA','rencanaSMP'));
     }
 
     public function getJadwalByDate($tanggal)

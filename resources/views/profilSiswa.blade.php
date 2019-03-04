@@ -55,7 +55,13 @@
                         <div class="mx-auto d-block">
                             <img class="rounded-circle mx-auto d-block" src="/images/admin.jpg" alt="Card image cap">
                             <h5 class="text-sm-center mt-2 mb-1">{{$profil->nama_panggilan}}</h5>
-                            <div class="location text-sm-center"><i class="fa fa-map-marker"></i> {{$profil->asal_sekolah}}</div>
+                            <div class="location text-sm-center">
+                                <i class="fa fa-map-marker"></i> 
+                                {{$profil->asal_sekolah}}
+                                @if(!empty($profil->jurusan))
+                                    <p>{{$profil->jurusan}}</p>                                    
+                                @endif
+                            </div>
                         </div>
                         <hr>
                         <div class="card-text text-sm-center">
@@ -77,11 +83,37 @@
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label class=" form-control-label">NO Kuitansi</label></div>
-                                    <div class="col-12 col-md-9">
-                                        <p class=""><strong>{{$profil->kuitansi}}</strong></p>
+                                        <div class="col col-md-3"><label class=" form-control-label">Jenis Pembayaran</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <p class=""><strong>{{$profil->jenis_bayar}}</strong></p>
+                                        </div>
                                     </div>
-                                </div>                                
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label class=" form-control-label">Jumlah Angsuran</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <p class=""><strong>{{$angsuran}}</strong></p>
+                                    </div>
+                                </div>
+                                @if(!empty($profil->diskon) && !empty($diskon_display))
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label class=" form-control-label">Tipe / Jumlah Diskon</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <p class=""><strong>{{$profil->diskon}} / Rp {{$diskon_display}}</strong></p>
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label class=" form-control-label">Harga</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <p class=""><strong>{{$harga_display}}</strong></p>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label class=" form-control-label">Terbayar</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <p class=""><strong>Rp {{$nominal}} / Rp {{$hargaTotal}}</strong></p>
+                                    </div>
+                                </div>
                         </div>
                 </div>
                 
@@ -243,6 +275,9 @@
                                                             <div class="col col-md-3"><label class=" form-control-label">Asal Sekolah</label></div>
                                                             <div class="col-12 col-md-9">
                                                                 <p class=""><strong>{{$profil->asal_sekolah}}</strong></p>
+                                                                {{-- @if(!empty($profil->jurusan)) --}}
+                                                                
+                                                                {{-- @endif --}}
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">

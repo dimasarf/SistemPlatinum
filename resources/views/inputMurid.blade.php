@@ -173,28 +173,102 @@
                                 <div class="form-group">
                                     <label class=" form-control-label">Rencana Setelah Lulus</label>
                                     @if($jenjang == 'SMP')
-                                        <select class="form-control" id="exampleFormControlSelect1" name="rencana">
+                                        <select multiple class="form-control" id="exampleFormControlSelect1" name="rencana[]">
                                             @foreach($rencanas as $rencana)
                                                 <option value="{{$rencana}}">{{$rencana}}</option>
                                             @endforeach
                                                 <option value="lainnya">lainnya</option>
                                         </select>
-                                    @elseif($jenjang == 'SMA')
-                                        <select class="form-control" id="exampleFormControlSelect1" name="rencana">
+                                    {{-- @elseif($jenjang == 'SMA')
+                                        <select multiple class="form-control" id="exampleFormControlSelect1" name="rencana[]">
                                             @foreach($rencanas as $rencana)
+
                                                 <option value="{{$rencana}}">{{$rencana}}</option>
                                             @endforeach
                                                 <option value="lainnya">lainnya</option>
-                                        </select>
-                                    @else
-                                        <select class="form-control" id="exampleFormControlSelect1" name="rencana">
-                                            @foreach($rencanas as $rencana)
-                                                <option value="{{$rencana}}">{{$rencana}}</option>
-                                            @endforeach
-                                                <option value="lainnya">lainnya</option>
-                                        </select>
+                                        </select> --}}
+                                    
+                                        {{-- <select multiple class="form-control" id="exampleFormControlSelect1" name="rencana[]"> --}}
+                                                {{-- @foreach($rencanas as $rencana) --}}
+                                            {{-- <div class="form-check" > --}}
+                                                
+                                                    {{-- <input class="form-check-input" type="checkbox" value="{{$rencana}}" id="defaultCheck1"  name="rencana[]">
+                                                    <label class="form-check-label" for="defaultCheck1">
+                                                        {{$rencana}}
+                                                    </label> --}}
+                                                
+                                            {{-- </div> --}}
+                                            {{-- @endforeach --}}
+                                                {{-- <option value="{{$rencana}}">{{$rencana}}</option> --}}
+                                            
+                                                {{-- <option value="lainnya">lainnya</option> --}}
+                                        {{-- </select> --}}
                                     @endif
                                 </div>
+                                <div>
+                                    
+                                </div>
+                                {{-- @foreach($rencanas as $rencana) --}}
+                                @if($jenjang == 'SMK')
+                                    <div class="form-check" style="margin-top: 40px; ">
+                                        <input class="form-check-input" type="checkbox" value="SNMPTN / PMDK-PN" id="defaultCheck1"  name="rencana[]" style="margin-left: -950px;">
+                                        <label class="form-check-label" for="defaultCheck1" style="margin-left: -600px;">
+                                                SNMPTN / PMDK-PN
+                                        </label>
+                                    </div>
+                                    <div class="form-check" style="margin-top: 20px; ">
+                                        <input class="form-check-input" type="checkbox" value="SBMPTN / UMPN" id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
+                                        <label class="form-check-label" for="defaultCheck1" style="margin-left: -380px;">
+                                            SBMPTN / UMPN
+                                        </label>
+                                    </div>
+                                    <div class="form-check" style="margin-top: 20px; ">
+                                            <input class="form-check-input" type="checkbox" value="STAN/KEDINASAN" id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
+                                            <label class="form-check-label" for="defaultCheck1" style="margin-left: -350px;">
+                                                STAN/KEDINASAN
+                                            </label>
+                                    </div>
+                                    <div class="form-check" style="margin-top: 20px; ">
+                                            <input class="form-check-input" type="checkbox" value="BINTARA POLISI" id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
+                                            <label class="form-check-label" for="defaultCheck1" style="margin-left: -380px;">
+                                                    BINTARA POLISI
+                                            </label>
+                                    </div>
+                                @elseif($jenjang == 'SMA')
+                                <div class="form-check" style="margin-top: 40px; ">
+                                        <input class="form-check-input" type="checkbox" value="SNMPTN / PMDK-PN" id="defaultCheck1"  name="rencana[]" style="margin-left: -550px;">
+                                        <label class="form-check-label" for="defaultCheck1" style="margin-left: -500px;">
+                                            SNMPTN
+                                        </label>
+                                    </div>
+                                    <div class="form-check" style="margin-top: 20px; ">
+                                        <input class="form-check-input" type="checkbox" value="SBMPTN / UMPN" id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
+                                        <label class="form-check-label" for="defaultCheck1" style="margin-left: -380px;">
+                                            SBMPTN
+                                        </label>
+                                    </div>
+                                    <div class="form-check" style="margin-top: 20px; ">
+                                            <input class="form-check-input" type="checkbox" value="STAN/KEDINASAN" id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
+                                            <label class="form-check-label" for="defaultCheck1" style="margin-left: -350px;">
+                                                STAN / KEDINASAN
+                                            </label>
+                                    </div>
+                                    <div class="form-check" style="margin-top: 20px; ">
+                                            <input class="form-check-input" type="checkbox" value="AKPOL / AKMIL / AAL   " id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
+                                            <label class="form-check-label" for="defaultCheck1" style="margin-left: -380px;">
+                                                AKPOL / AKMIL / AAL   
+                                            </label>
+                                    </div>
+                                    <div class="form-check" style="margin-top: 20px; ">
+                                            <input class="form-check-input" type="checkbox" value="SPAN - PTKIN" id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
+                                            <label class="form-check-label" for="defaultCheck1" style="margin-left: -380px;">
+                                                SPAN - PTKIN
+                                            </label>
+                                    </div>
+                                    
+                                @endif
+                                 {{-- @endforeach --}}
+                                  
                                 </br>
                                 <input type="button" name="previous" class="previous action-button" value="Previous" />
                                 <input type="button" name="next" class="next action-button" value="Next" />
@@ -208,16 +282,6 @@
                                 <div class="form-group">
                                     <label class=" form-control-label">No Kuitansi</label>
                                     <input name="kuitansi" placeholder="Nama Lengkap" class="name" required />
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Bonus yang didapat</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option value="Event">Event</option>
-                                        <option value="Alumni">Alumni</option>
-                                        <option value="Lunas">Lunas</option>
-                                        <option value="Referensi">Referensi</option>
-                                        <option value="Lainnya">Lainnya</option>
-                                    </select>
                                 </div>
                                 @if($jenjang!= 'SMK')
                                     <div class="form-group">

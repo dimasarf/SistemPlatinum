@@ -217,19 +217,60 @@
                         </div>
                     </div><!-- /.card -->
                 </div>
-
-                <div class="row">
-                        <div class="col-lg-6 col-xl-12">
-                            <div class="card br-0">
-                                <div class="card-body">
-                                    <div class="chart-container ov-h">
-                                        <div id="flotPie1" class="float-chart"></div>
-                                    </div>
-                                </div>
-                            </div><!-- /.card -->
+        </div> <!-- /.col-md-4 -->
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Jumlah Siswa </h4>
+                    <div class="form-inline">
+                        <input type="text" class="form-control col-lg-4" placeholder="ketik tahun" id="tahun">
+                        <button class="btn btn-success ml-3 btn-sortir">Sortir</button>
+                    </div>
+                    <canvas id="singelBarChart"></canvas>
                 </div>
             </div>
-        </div> <!-- /.col-md-4 -->
+        </div><!-- /# column -->
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-one">
+                        <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
+                        <div class="stat-content dib">
+                            <div class="stat-text">Jumlah Siswa</div>
+                            <div class="stat-digit">{{$jumlahSiswa}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Persentase Rencana SMP </h4>
+                    <canvas id="doughutChart1"></canvas>
+                </div>
+            </div>
+        </div><!-- /# column -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Persentase Rencana SMA </h4>
+                    <canvas id="doughutChart2"></canvas>
+                </div>
+            </div>
+        </div><!-- /# column -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Persentase Rencana SMK </h4>
+                    <canvas id="doughutChart3"></canvas>
+                </div>
+            </div>
+        </div><!-- /# column -->
     </div>
     {{-- <div class="modal fade none-border fullscreen" id="event-modal">
         <div class="modal-dialog">
@@ -329,15 +370,170 @@
    
 </div>
 <!-- /.orders -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 
+{{-- <script src="/assets/js/main.js"></script> --}}
+<!--  Chart js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+<script src="assets/js/init/chartjs-init.js"></script>
+<!--Flot Chart-->
+<script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
 $('#full').click(function()
 {
     $('#jadwal-index').clone().appendTo('#jadwal-modal');
 })
+var jumlahSMP = @json($jumlahSMP);
+var jumlahSMA = @json($jumlahSMA);
+var jumlahSMK = @json($jumlahSMK);
 
-      
+var rencanaSMA = @json($rencanaSMA);
+var rencanaSMK = @json($rencanaSMK);
+var rencanaSMP = @json($rencanaSMP);
+
+var labelSmp = []
+var dataSmp = []
+
+for(j = 0;j<rencanaSMP.length; j++ )
+{
+    labelSmp.push(rencanaSMP[j].rencana)
+    dataSmp.push(rencanaSMP[j].jumlah)
+}
+
+var labelSma = []
+var dataSma = []
+
+for(i = 0;i<rencanaSMA.length; i++ )
+{
+    labelSma.push(rencanaSMA[i].rencana)
+    dataSma.push(rencanaSMA[i].jumlah)
+}
+
+var labelSmk = []
+var dataSmk = []
+
+for(i = 0;i<rencanaSMK.length; i++ )
+{
+    labelSmk.push(rencanaSMK[i].rencana)
+    dataSmk.push(rencanaSMK[i].jumlah)
+}
+
+console.log(labelSma)
+
+
+var ctx = document.getElementById( "singelBarChart" );
+
+    ctx.height = 150;
+    var myChart = new Chart( ctx, {
+        type: 'bar',
+        data: {
+            labels: [ "SMP", "SMA", "SMK" ],
+            datasets: [
+                {
+                    label: "Jumlah Siswa",
+                    data: [ jumlahSMP, jumlahSMA, jumlahSMK ],
+                    borderColor: "rgba(0, 194, 146, 0.9)",
+                    borderWidth: "0",
+                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+                            }
+                        ]
+        },
+        options: {
+            scales: {
+                yAxes: [ {
+                    ticks: {
+                        beginAtZero: true
+                    }
+                                } ]
+            }
+        }
+    } );
+    var ctx = document.getElementById( "doughutChart1" );
+    ctx.height = 150;
+    
+    var myChart = new Chart( ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [ {
+                data: dataSmp,
+                backgroundColor: [
+                                    "rgb(3,161,164)",
+                                    "rgb(238,149,36)",
+                                    "rgb(239,48,120)",
+                                ],
+                hoverBackgroundColor: [
+                                    "rgba(0, 194, 146,0.9)",
+                                    "rgba(0, 194, 146,0.7)",
+                                    "rgba(0, 194, 146,0.5)",
+                                ]
+
+                            } ],
+            labels: labelSmp
+        },
+        options: {
+            responsive: true
+        }
+    } );
+
+    var ctx = document.getElementById( "doughutChart2" );
+    ctx.height = 150;
+    var myChart = new Chart( ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [ {
+                data: dataSma,
+                backgroundColor: [
+                                    "rgb(3,161,164)",
+                                    "rgb(238,149,36)",
+                                    "rgb(239,48,120)",
+                                    "rgb(28,124,187)",
+                                    "rgb(28,120,183)"
+                                ],
+                hoverBackgroundColor: [
+                                    "rgb(3,161,164)",
+                                    "rgb(238,149,36)",
+                                    "rgb(239,48,120)",
+                                    "rgb(28,124,187)",
+                                    "rgb(28,120,183)"
+                                ]
+
+                            } ],
+            labels: labelSma
+        },
+        options: {
+            responsive: true
+        }
+    } );
+
+    var ctx = document.getElementById( "doughutChart3" );
+    ctx.height = 150;
+    var myChart = new Chart( ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [ {
+                data: dataSmk,
+                backgroundColor: [
+                                    "rgb(3,161,164)",
+                                    "rgb(238,149,36)",
+                                    "rgb(239,48,120)",
+                                    "rgb(28,124,187)"
+                                    
+                                ],
+                hoverBackgroundColor: [
+                                    "rgb(3,161,164)",
+                                    "rgb(238,149,36)",
+                                    "rgb(239,48,120)",
+                                ]
+
+                            } ],
+            labels: labelSmk
+        },
+        options: {
+            responsive: true
+        }
+    } );
 
 </script>
 @endsection

@@ -12,6 +12,7 @@ class MuridBaruController extends Controller
     {
         $jenjang = 'SMP';
         $rencanas = array('SMA/MA', 'SMK/MK');
+        
         return view('inputMurid', compact('jenjang', 'rencanas'));
     }
 
@@ -26,6 +27,7 @@ class MuridBaruController extends Controller
     {
         $jenjang = 'SMK';
         $rencanas = array('SNMPTN / PMDK-PN', 'SBMPTN / UMPN', 'STAN / KEDINASAN', 'BINTARA POLISI');
+        // return $rencanas;
         return view('inputMurid', compact('jenjang', 'rencanas'));
     }
 
@@ -51,7 +53,7 @@ class MuridBaruController extends Controller
         $siswa->telepon_ortu = $request->telepon_ortu ;
         $siswa->asal_sekolah = $request->asal_sekolah ;
         $siswa->jam = $request->jam ;
-        $siswa->rencana_lulus = $request->rencana ;
+        $siswa->rencana_lulus = implode(',', $request->rencana) ;
         $siswa->jadwal = $request->hari ;
         $siswa->diskon = $request->diskon ;
         $siswa->metode_pembayaran = $request->metode ;
