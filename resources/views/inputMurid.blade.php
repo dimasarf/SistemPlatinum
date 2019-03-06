@@ -210,64 +210,36 @@
                                 </div>
                                 {{-- @foreach($rencanas as $rencana) --}}
                                 @if($jenjang == 'SMK')
-                                    <div class="form-check" style="margin-top: 40px; ">
-                                        <input class="form-check-input" type="checkbox" value="SNMPTN / PMDK-PN" id="defaultCheck1"  name="rencana[]" style="margin-left: -950px;">
-                                        <label class="form-check-label" for="defaultCheck1" style="margin-left: -600px;">
-                                                SNMPTN / PMDK-PN
-                                        </label>
-                                    </div>
-                                    <div class="form-check" style="margin-top: 20px; ">
-                                        <input class="form-check-input" type="checkbox" value="SBMPTN / UMPN" id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
-                                        <label class="form-check-label" for="defaultCheck1" style="margin-left: -380px;">
-                                            SBMPTN / UMPN
-                                        </label>
-                                    </div>
-                                    <div class="form-check" style="margin-top: 20px; ">
-                                            <input class="form-check-input" type="checkbox" value="STAN/KEDINASAN" id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
-                                            <label class="form-check-label" for="defaultCheck1" style="margin-left: -350px;">
-                                                STAN/KEDINASAN
-                                            </label>
-                                    </div>
-                                    <div class="form-check" style="margin-top: 20px; ">
-                                            <input class="form-check-input" type="checkbox" value="BINTARA POLISI" id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
-                                            <label class="form-check-label" for="defaultCheck1" style="margin-left: -380px;">
-                                                    BINTARA POLISI
-                                            </label>
-                                    </div>
+                                    <table style="margin-top: 50px;">
+                                        @foreach($rencanas as $rencana)
+                                        <tr class="d-flex justify-content-start" style="margin-top: 5px; " >                                            
+                                            <td>
+                                                <input class="form-check-input" type="checkbox" value="{{$rencana}}" id="defaultCheck1"  name="rencana[]" >
+                                            </td>
+                                            <td>
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                   {{$rencana}}
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
                                 @elseif($jenjang == 'SMA')
-                                <div class="form-check" style="margin-top: 40px; ">
-                                        <input class="form-check-input" type="checkbox" value="SNMPTN / PMDK-PN" id="defaultCheck1"  name="rencana[]" style="margin-left: -550px;">
-                                        <label class="form-check-label" for="defaultCheck1" style="margin-left: -500px;">
-                                            SNMPTN
-                                        </label>
-                                    </div>
-                                    <div class="form-check" style="margin-top: 20px; ">
-                                        <input class="form-check-input" type="checkbox" value="SBMPTN / UMPN" id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
-                                        <label class="form-check-label" for="defaultCheck1" style="margin-left: -380px;">
-                                            SBMPTN
-                                        </label>
-                                    </div>
-                                    <div class="form-check" style="margin-top: 20px; ">
-                                            <input class="form-check-input" type="checkbox" value="STAN/KEDINASAN" id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
-                                            <label class="form-check-label" for="defaultCheck1" style="margin-left: -350px;">
-                                                STAN / KEDINASAN
-                                            </label>
-                                    </div>
-                                    <div class="form-check" style="margin-top: 20px; ">
-                                            <input class="form-check-input" type="checkbox" value="AKPOL / AKMIL / AAL   " id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
-                                            <label class="form-check-label" for="defaultCheck1" style="margin-left: -380px;">
-                                                AKPOL / AKMIL / AAL   
-                                            </label>
-                                    </div>
-                                    <div class="form-check" style="margin-top: 20px; ">
-                                            <input class="form-check-input" type="checkbox" value="SPAN - PTKIN" id="defaultCheck1"  name="rencana[]" style="margin-left: -350px;">
-                                            <label class="form-check-label" for="defaultCheck1" style="margin-left: -380px;">
-                                                SPAN - PTKIN
-                                            </label>
-                                    </div>
-                                    
+                                    <table style="margin-top: 50px;">
+                                        @foreach($rencanas as $rencana)
+                                        <tr class="d-flex justify-content-start" style="margin-top: 5px; " >                                            
+                                            <td>
+                                                <input class="form-check-input" type="checkbox" value="{{$rencana}}" id="defaultCheck1"  name="rencana[]" >
+                                            </td>
+                                            <td>
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                   {{$rencana}}
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
                                 @endif
-                                 {{-- @endforeach --}}
                                   
                                 </br>
                                 <input type="button" name="previous" class="previous action-button" value="Previous" />

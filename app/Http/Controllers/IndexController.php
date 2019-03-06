@@ -12,6 +12,7 @@ use DB;
 use Carbon\Carbon;
 use Carbon\CarbonTimeZone;
 use App\siswa;
+use Response;
 
 class IndexController extends Controller
 {
@@ -52,5 +53,24 @@ class IndexController extends Controller
                    ->select('jadwals.*', 'tentors.tentor', 'mapels.mapel', 'kelas.kelas')
                    ->get();
         return response()->json($jadwals);
+    }
+
+    public function getJenjangTahun($tahun)
+    {
+        $rencanaSMA = siswa::getRencanaJenjangTahun('SMA', $tahun);
+        $rencanaSMK = siswa::getRencanaJenjangTahun('SMK', $tahun);
+        $rencanaSMP = siswa::getRencanaJenjangTahun('SMP', $tahun);
+        $jumlahSMP = siswa::getTotalSiswa('SMP', '2019');
+        $jumlahSMA = siswa::getTotalSiswa('SMA', '2019');
+        $jumlahSMK =siswa::getTotalSiswa('SMK', '2019');
+        return Response::json(array
+        (
+            'rencanaSMA' => $rencanaSMA,
+            'rencanaSMK' => $rencanaSMK,
+            'rencanaSMP' => $rencanaSMP,
+            'jumlahSMP' => $jumlahSMP,
+            'jumlahSMA' => $jumlahSMA,
+            'jumlahSMK' => $jumlahSMK,
+        ));
     }
 }

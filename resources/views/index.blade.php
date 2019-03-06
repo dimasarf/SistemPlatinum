@@ -423,7 +423,7 @@ for(i = 0;i<rencanaSMK.length; i++ )
 console.log(labelSma)
 
 
-var ctx = document.getElementById( "singelBarChart" );
+    var ctx = document.getElementById( "singelBarChart" );
 
     ctx.height = 150;
     var myChart = new Chart( ctx, {
@@ -434,9 +434,17 @@ var ctx = document.getElementById( "singelBarChart" );
                 {
                     label: "Jumlah Siswa",
                     data: [ jumlahSMP, jumlahSMA, jumlahSMK ],
-                    borderColor: "rgba(0, 194, 146, 0.9)",
+                    borderColor: [
+                                        "rgb(3,161,164)",
+                                        "rgb(238,149,36)",
+                                        "rgb(239,48,120)",
+                                    ],
                     borderWidth: "0",
-                    backgroundColor: "rgba(0, 194, 146, 0.5)"
+                    backgroundColor: [
+                                        "rgb(3,161,164)",
+                                        "rgb(238,149,36)",
+                                        "rgb(239,48,120)",
+                                    ]
                             }
                         ]
         },
@@ -534,6 +542,174 @@ var ctx = document.getElementById( "singelBarChart" );
             responsive: true
         }
     } );
+    $('.btn-sortir').click(function()
+    {
+        var tahun = $('#tahun').val();
+        $.ajax({
+            method: 'GET',
+            dataType: 'json',
+            url: '/statTahun/' + tahun,
+            success : function (data) 
+            {
+                var rencanaSMA = data['rencanaSMA'];
+                var rencanaSMK = data['rencanaSMK'];
+                var rencanaSMP = data['rencanaSMP'];
 
+                var jumlahSMA = data['jumlahSMA'];
+                var jumlahSMK = data['jumlahSMK'];
+                var jumlahSMP = data['jumlahSMP'];
+
+                var labelSmp = []
+                var dataSmp = []
+                $('singelBarChart').remove();
+                var ctx = document.getElementById( "singelBarChart" );
+
+                ctx.height = 150;
+                var myChart = new Chart( ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [ "SMP", "SMA", "SMK" ],
+                        datasets: [
+                            {
+                                label: "Jumlah Siswa",
+                                data: [ jumlahSMP, jumlahSMA, jumlahSMK ],
+                                borderColor: [
+                                                    "rgb(3,161,164)",
+                                                    "rgb(238,149,36)",
+                                                    "rgb(239,48,120)",
+                                                ],
+                                borderWidth: "0",
+                                backgroundColor: [
+                                                    "rgb(3,161,164)",
+                                                    "rgb(238,149,36)",
+                                                    "rgb(239,48,120)",
+                                                ]
+                                        }
+                                    ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [ {
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                                            } ]
+                        }
+                    }
+                } );
+
+                for(j = 0;j<rencanaSMP.length; j++ )
+                {
+                    labelSmp.push(rencanaSMP[j].rencana)
+                    dataSmp.push(rencanaSMP[j].jumlah)
+                }
+
+                var labelSma = []
+                var dataSma = []
+
+                for(i = 0;i<rencanaSMA.length; i++ )
+                {
+                    labelSma.push(rencanaSMA[i].rencana)
+                    dataSma.push(rencanaSMA[i].jumlah)
+                }
+
+                var labelSmk = []
+                var dataSmk = []
+
+                for(i = 0;i<rencanaSMK.length; i++ )
+                {
+                    labelSmk.push(rencanaSMK[i].rencana)
+                    dataSmk.push(rencanaSMK[i].jumlah)
+                }
+
+                var ctx = document.getElementById( "doughutChart1" );
+                ctx.height = 150;
+                
+                var myChart = new Chart( ctx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [ {
+                            data: dataSmp,
+                            backgroundColor: [
+                                                "rgb(3,161,164)",
+                                                "rgb(238,149,36)",
+                                                "rgb(239,48,120)",
+                                            ],
+                            hoverBackgroundColor: [
+                                                "rgba(0, 194, 146,0.9)",
+                                                "rgba(0, 194, 146,0.7)",
+                                                "rgba(0, 194, 146,0.5)",
+                                            ]
+
+                                        } ],
+                        labels: labelSmp
+                    },
+                    options: {
+                        responsive: true
+                    }
+                } );
+
+                var ctx = document.getElementById( "doughutChart2" );
+                ctx.height = 150;
+                var myChart = new Chart( ctx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [ {
+                            data: dataSma,
+                            backgroundColor: [
+                                                "rgb(3,161,164)",
+                                                "rgb(238,149,36)",
+                                                "rgb(239,48,120)",
+                                                "rgb(28,124,187)",
+                                                "rgb(28,120,183)"
+                                            ],
+                            hoverBackgroundColor: [
+                                                "rgb(3,161,164)",
+                                                "rgb(238,149,36)",
+                                                "rgb(239,48,120)",
+                                                "rgb(28,124,187)",
+                                                "rgb(28,120,183)"
+                                            ]
+
+                                        } ],
+                        labels: labelSma
+                    },
+                    options: {
+                        responsive: true
+                    }
+                } );
+
+                var ctx = document.getElementById( "doughutChart3" );
+                ctx.height = 150;
+                var myChart = new Chart( ctx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [ {
+                            data: dataSmk,
+                            backgroundColor: [
+                                                "rgb(3,161,164)",
+                                                "rgb(238,149,36)",
+                                                "rgb(239,48,120)",
+                                                "rgb(28,124,187)"
+                                                
+                                            ],
+                            hoverBackgroundColor: [
+                                                "rgb(3,161,164)",
+                                                "rgb(238,149,36)",
+                                                "rgb(239,48,120)",
+                                            ]
+
+                                        } ],
+                        labels: labelSmk
+                    },
+                    options: {
+                        responsive: true
+                    }
+                } );
+
+                
+            }
+        })
+    })
 </script>
 @endsection

@@ -68,3 +68,5 @@ Route::POST('/pembayaran-murid-cari', 'PembayaranController@cari');
 
 Route::GET('/bayar/{id}', 'BayarController@index');
 Route::POST('/bayar/{id}', 'BayarController@bayar');
+
+Route::get('/statTahun/{tahun}', 'IndexController@getJenjangTahun');
